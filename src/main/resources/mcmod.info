@@ -2,8 +2,8 @@
 {
   "modid": "HarvestTooltips",
   "name": "HarvestTooltips",
-  "description": "Displays Tool Harvest levels.",
-  "version": "1.1",
+  "description": "Displays Tool Mining levels.",
+  "version": "1.2",
   "mcversion": "1.7.10",
   "url": "https://github.com/Raspen0/HarvestTooltips",
   "updateUrl": "",
