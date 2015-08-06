@@ -23,17 +23,25 @@ import cpw.mods.fml.relauncher.SideOnly;
 @Mod(modid = HarvestTooltips.MODID, version = HarvestTooltips.VERSION, guiFactory = "nl.raspen0.HarvestTooltips.HT_GuiFactory", acceptableRemoteVersions = "*")
 public class HarvestTooltips {
 	public static final String MODID = "HarvestTooltips";
-	public static final String VERSION = "1.1";
+	public static final String VERSION = "1.2";
 	public static Configuration configFile;
 	public static boolean enableTooltips = true;
 
-	// Harvestlevel Names
+	//Mining Level Names
 	public static String Level0;
 	public static String Level1;
 	public static String Level2;
 	public static String Level3;
 	public static String Level4;
 	public static String Level5;
+
+	//Mining Level Colors
+	public static String Color0;
+	public static String Color1;
+	public static String Color2;
+	public static String Color3;
+	public static String Color4;
+	public static String Color5;
 
 	@Mod.Instance("HarvestTooltips")
 	public static HarvestTooltips instance;
@@ -54,12 +62,19 @@ public class HarvestTooltips {
 
 	public static void syncConfig() {
 		enableTooltips = configFile.get(Configuration.CATEGORY_GENERAL, "Enable Tooltips", true).getBoolean(true);
-		Level0 = configFile.get("General", "Harvest Level 0", "Stone").getString();
-		Level1 = configFile.get("General", "Harvest Level 1", "Iron").getString();
-		Level2 = configFile.get("General", "Harvest Level 2", "Redstone").getString();
-		Level3 = configFile.get("General", "Harvest Level 3", "Obsidian").getString();
-		Level4 = configFile.get("General", "Harvest Level 4", "Cobalt").getString();
-		Level4 = configFile.get("General", "Harvest Level 5", "Atlarus").getString();
+		Level0 = configFile.get("Level Names", "Mining Level 0", "Stone").getString();
+		Level1 = configFile.get("Level Names", "Mining Level 1", "Iron").getString();
+		Level2 = configFile.get("Level Names", "Mining Level 2", "Redstone").getString();
+		Level3 = configFile.get("Level Names", "Mining Level 3", "Obsidian").getString();
+		Level4 = configFile.get("Level Names", "Mining Level 4", "Cobalt").getString();
+		Level5 = configFile.get("Level Names", "Mining Level 5", "Atlarus").getString();
+		
+		Color0 = configFile.get("Level Colors", "Mining Level 0", "GRAY").getString();
+		Color1 = configFile.get("Level Colors", "Mining Level 1", "DARK_GRAY").getString();
+		Color2 = configFile.get("Level Colors", "Mining Level 2", "RED").getString();
+		Color3 = configFile.get("Level Colors", "Mining Level 3", "LIGHT_PURPLE").getString();
+		Color4 = configFile.get("Level Colors", "Mining Level 4", "BLUE").getString();
+		Color5 = configFile.get("Level Colors", "Mining Level 5", "YELLOW").getString();
 		if (configFile.hasChanged())
 			configFile.save();
 	}
@@ -85,20 +100,20 @@ public class HarvestTooltips {
 		int picklevel = event.itemStack.getItem().getHarvestLevel(event.itemStack, "pickaxe");
 		int shovellevel = event.itemStack.getItem().getHarvestLevel(event.itemStack, "shovel");
 		int axelevel = event.itemStack.getItem().getHarvestLevel(event.itemStack, "axe");
-
+	
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 			if (picklevel == 0 || shovellevel == 0 || axelevel == 0)
-				event.toolTip.add("Mining Level: " + (EnumChatFormatting.GRAY + this.Level0));
+				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color0) + this.Level0));
 			if (picklevel == 1 || shovellevel == 1 || axelevel == 1)
-				event.toolTip.add("Mining Level: " + (EnumChatFormatting.DARK_GRAY + this.Level1));
+				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color1) + this.Level1));
 			if (picklevel == 2 || shovellevel == 2 || axelevel == 2)
-				event.toolTip.add("Mining Level: " + (EnumChatFormatting.RED + this.Level2));
+				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color2) + this.Level2));
 			if (picklevel == 3 || shovellevel == 3 || axelevel == 3)
-				event.toolTip.add("Mining Level: " + (EnumChatFormatting.LIGHT_PURPLE + this.Level3));
+				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color3) + this.Level3));
 			if (picklevel == 4 || shovellevel == 4 || axelevel == 4)
-				event.toolTip.add("Mining Level: " + (EnumChatFormatting.BLUE + this.Level4));
+				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color4) + this.Level4));
 			if (picklevel == 5 || shovellevel == 5 || axelevel == 5)
-				event.toolTip.add("Mining Level: " + (EnumChatFormatting.YELLOW + this.Level5));
+				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color5) + this.Level5));
 			if (picklevel > 5)
 				event.toolTip.add("Mining Level: " + picklevel);
 			if (shovellevel > 5)
