@@ -16,7 +16,7 @@ public class HT_ConfigGUI extends GuiConfig {
 	public HT_ConfigGUI(GuiScreen guiScreen) {
 
 		super(guiScreen, getConfigElements(), HarvestTooltips.MODID, false, false,
-				GuiConfig.getAbridgedConfigPath(HarvestTooltips.configFile.toString()));
+				GuiConfig.getAbridgedConfigPath("HarvestTooltips Configuration"));
 
 	}
 
@@ -46,7 +46,7 @@ public class HT_ConfigGUI extends GuiConfig {
 					new ConfigElement(HarvestTooltips.configFile.getCategory(HarvestTooltips.CATEGORY_MISC))
 							.getChildElements(),
 					this.owningScreen.modID, HarvestTooltips.CATEGORY_MISC, false, false,
-					GuiConfig.getAbridgedConfigPath(HarvestTooltips.configFile.toString()));
+					GuiConfig.getAbridgedConfigPath("General Configuration"));
 		}
 	}
 
@@ -63,7 +63,7 @@ public class HT_ConfigGUI extends GuiConfig {
 					new ConfigElement(HarvestTooltips.configFile.getCategory(HarvestTooltips.CATEGORY_NAMES))
 							.getChildElements(),
 					this.owningScreen.modID, HarvestTooltips.CATEGORY_NAMES, false, false,
-					GuiConfig.getAbridgedConfigPath(HarvestTooltips.configFile.toString()));
+					GuiConfig.getAbridgedConfigPath("Level Name Configuration"));
 		}
 	}
 
@@ -80,7 +80,7 @@ public class HT_ConfigGUI extends GuiConfig {
 					new ConfigElement(HarvestTooltips.configFile.getCategory(HarvestTooltips.CATEGORY_COLORS))
 							.getChildElements(),
 					this.owningScreen.modID, HarvestTooltips.CATEGORY_COLORS, false, false,
-					GuiConfig.getAbridgedConfigPath(HarvestTooltips.configFile.toString()));
+					GuiConfig.getAbridgedConfigPath("Level Colors Configuration"));
 		}
 	}
 }

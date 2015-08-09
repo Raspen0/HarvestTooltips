@@ -1,5 +1,6 @@
 package nl.raspen0.HarvestTooltips;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.EnumChatFormatting;
@@ -25,12 +26,13 @@ public class HarvestTooltips {
 	public static final String MODID = "HarvestTooltips";
 	public static final String VERSION = "1.2";
 	public static Configuration configFile;
-	public static boolean enableTooltips = true;
 
 	public static final String CATEGORY_MISC = "general";
 	public static final String CATEGORY_NAMES = "level names";
 	public static final String CATEGORY_COLORS = "level colors";
 
+	public static String tooltipMode;
+	
 	// Mining Level Names
 	public static String Level0;
 	public static String Level1;
@@ -65,8 +67,8 @@ public class HarvestTooltips {
 	}
 
 	public static void syncConfig() {
-		enableTooltips = configFile.get(CATEGORY_MISC, "Enable Tooltips", true).getBoolean(true);
-
+		tooltipMode = configFile.get(CATEGORY_MISC, "Tooltip Mode", "1", "The display mode of the tooltips (0 = disabled, 1 = While pressing SHIFT, 2 = When in debug mode (F3 + H), 3 = Always)").getString();
+		
 		Level0 = configFile.get(CATEGORY_NAMES, "Mining Level 0", "Stone").getString();
 		Level1 = configFile.get(CATEGORY_NAMES, "Mining Level 1", "Iron").getString();
 		Level2 = configFile.get(CATEGORY_NAMES, "Mining Level 2", "Redstone").getString();
@@ -90,22 +92,41 @@ public class HarvestTooltips {
 			syncConfig();
 	}
 
+	
+	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void onItemToolTip(ItemTooltipEvent event) {
+	public void doTooltip(ItemTooltipEvent event) {
+		if (tooltipMode.equalsIgnoreCase("1")) {
+			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+				this.ShowTooltip(event);
+			}
+		}
+		if (tooltipMode.equalsIgnoreCase("2")) {
+			this.ShowTooltip(event);
+		}
+		
+		if (tooltipMode.equalsIgnoreCase("3")) {
+		    boolean debugMode = Minecraft.getMinecraft().gameSettings.advancedItemTooltips;
+		    if(debugMode){
+			this.ShowTooltip(event);
+		}
+		}
+	}
+	
+	
+	
+	@SideOnly(Side.CLIENT)
+	public void ShowTooltip(ItemTooltipEvent event) {
 		if (event.entityPlayer == null)
 			return;
 		if (!(event.itemStack.getItem() instanceof ItemTool))
 			return;
-		if (!enableTooltips) {
-			return;
-		}
-
+		
 		int picklevel = event.itemStack.getItem().getHarvestLevel(event.itemStack, "pickaxe");
 		int shovellevel = event.itemStack.getItem().getHarvestLevel(event.itemStack, "shovel");
 		int axelevel = event.itemStack.getItem().getHarvestLevel(event.itemStack, "axe");
 
-		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 			if (picklevel == 0 || shovellevel == 0 || axelevel == 0)
 				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color0) + this.Level0));
 			if (picklevel == 1 || shovellevel == 1 || axelevel == 1)
@@ -124,7 +145,6 @@ public class HarvestTooltips {
 				event.toolTip.add("Mining Level: " + shovellevel);
 			if (axelevel > 5)
 				event.toolTip.add("Mining Level: " + axelevel);
-		}
 	}
 
 }
