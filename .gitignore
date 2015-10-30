@@ -8,3 +8,6 @@
 /api/
 /.classpath
 /.project
+/run/
+/HarvestTooltips_Client.launch
+/HarvestTooltips_Server.launch
