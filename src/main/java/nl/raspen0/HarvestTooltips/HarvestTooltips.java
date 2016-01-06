@@ -20,10 +20,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.input.Keyboard;
 
+
 @Mod(modid = HarvestTooltips.MODID, version = HarvestTooltips.VERSION, guiFactory = "nl.raspen0.HarvestTooltips.HT_GuiFactory", acceptableRemoteVersions = "*")
 public class HarvestTooltips {
 	public static final String MODID = "HarvestTooltips";
-	public static final String VERSION = "1.2";
+	public static final String VERSION = "1.3";
 	public static Configuration configFile;
 
 	public static final String CATEGORY_MISC = "general";
@@ -62,7 +63,6 @@ public class HarvestTooltips {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(new HarvestTooltips());
-		FMLCommonHandler.instance().bus().register(instance);
 	}
 
 	public static void syncConfig() {
