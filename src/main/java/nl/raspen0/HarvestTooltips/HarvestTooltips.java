@@ -3,8 +3,7 @@ package nl.raspen0.HarvestTooltips;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemTool;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -127,17 +126,17 @@ public class HarvestTooltips {
 		int axelevel = event.itemStack.getItem().getHarvestLevel(event.itemStack, "axe");
 
 			if (picklevel == 0 || shovellevel == 0 || axelevel == 0)
-				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color0) + this.Level0));
+				event.toolTip.add("Mining Level: " + (TextFormatting.getValueByName(Color0) + this.Level0));
 			if (picklevel == 1 || shovellevel == 1 || axelevel == 1)
-				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color1) + this.Level1));
+				event.toolTip.add("Mining Level: " + (TextFormatting.getValueByName(Color1) + this.Level1));
 			if (picklevel == 2 || shovellevel == 2 || axelevel == 2)
-				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color2) + this.Level2));
+				event.toolTip.add("Mining Level: " + (TextFormatting.getValueByName(Color2) + this.Level2));
 			if (picklevel == 3 || shovellevel == 3 || axelevel == 3)
-				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color3) + this.Level3));
+				event.toolTip.add("Mining Level: " + (TextFormatting.getValueByName(Color3) + this.Level3));
 			if (picklevel == 4 || shovellevel == 4 || axelevel == 4)
-				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color4) + this.Level4));
+				event.toolTip.add("Mining Level: " + (TextFormatting.getValueByName(Color4) + this.Level4));
 			if (picklevel == 5 || shovellevel == 5 || axelevel == 5)
-				event.toolTip.add("Mining Level: " + (EnumChatFormatting.getValueByName(Color5) + this.Level5));
+				event.toolTip.add("Mining Level: " + (TextFormatting.getValueByName(Color5) + this.Level5));
 			if (picklevel > 5)
 				event.toolTip.add("Mining Level: " + picklevel);
 			if (shovellevel > 5)
